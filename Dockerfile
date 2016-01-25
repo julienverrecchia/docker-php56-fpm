@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libicu-dev \
         libxml2-dev \
+        libmemcached-dev \
         ssmtp \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install mbstring mcrypt pdo_pgsql curl intl xmlrpc \
@@ -28,6 +29,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Setup timezone to Europe/Paris
 RUN cat /usr/src/php/php.ini-production | sed 's/^;\(date.timezone.*\)/\1 \"Europe\/Paris\"/' > /usr/local/etc/php/php.ini
+
+# Memcached
+RUN pecl install memcached \
+    && docker-php-ext-enable memcached
 
 # SSMTP config
 ADD ssmtp.conf /etc/ssmtp/ssmtp.conf

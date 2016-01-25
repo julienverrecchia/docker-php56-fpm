@@ -13,8 +13,12 @@ This Docker image provides a php-fpm environment with built-in options :
  - gd
  - ldap
  - opcache
+ - memcached
 
-Timezone is set to _Europe/Paris_
+Timezone is set to _Europe/Paris_.
+
+## SSMTP
+Simple sSMTP config which expects an MTA available via a 'mailhub' link / host.
 
 ## Usage
 Intended use : coupled to nginx with docker-compose
