@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libicu-dev \
         libxml2-dev \
+        ssmtp \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install mbstring mcrypt pdo_pgsql curl intl xmlrpc \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -27,6 +28,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Setup timezone to Europe/Paris
 RUN cat /usr/src/php/php.ini-production | sed 's/^;\(date.timezone.*\)/\1 \"Europe\/Paris\"/' > /usr/local/etc/php/php.ini
+
+# SSMTP config
+ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
+ADD php-smtp.ini /usr/local/etc/php/conf.d/php-smtp.ini
 
 RUN usermod -u 1000 www-data
 
