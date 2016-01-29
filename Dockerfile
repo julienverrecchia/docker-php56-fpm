@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libicu-dev \
         libxml2-dev \
+        zlib1g-dev \
+        memcached \
         libmemcached-dev \
         ssmtp \
     && rm -rf /var/lib/apt/lists/* \
@@ -23,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install ldap \
     && docker-php-ext-install opcache \
+    && docker-php-ext-install zip \
     && apt-get purge -y --auto-remove $buildDeps \
     && cd /usr/src/php \
     && make clean
