@@ -19,7 +19,8 @@ RUN apt-get update \
         unzip \
         build-essential \
         libaio1 \
-        re2c
+        re2c \
+        wget
 
 RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd \
@@ -100,6 +101,15 @@ ADD ./config/custom.php.ini /usr/local/etc/php/conf.d
 RUN sed -e '/9000/ s/^;*/;/' -i /usr/local/etc/php-fpm.d/zz-docker.conf
 RUN sed -e '/9000/ s/^;*/;/' -i /usr/local/etc/php-fpm.d/www.conf
 
+RUN wget https://phar.phpunit.de/phpunit-5.7.phar \
+    && chmod +x phpunit-5.7.phar \
+    && mv phpunit-5.7.phar /usr/local/bin/phpunit
+
+# PHP CS Fixer
+RUN wget https://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer \
+    && chmod a+x php-cs-fixer \
+    && mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
 # Clean up
 RUN apt-get clean \
     && rm -r /var/lib/apt/lists/*
@@ -112,4 +122,4 @@ CMD ["php-fpm"]
 
 LABEL \
     maintainer="Julien Verrecchia" \
-    version="2018.02.22"
+    version="2018.10.04"
