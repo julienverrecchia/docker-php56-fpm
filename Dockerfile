@@ -97,6 +97,7 @@ RUN php /tmp/pdo_oci-test.php
 
 # PHP config
 ADD ./config/ioncube.ini /usr/local/etc/php/conf.d/00-ioncube.ini
+ADD ./config/php-fpm.conf /usr/local/etc/php-fpm.conf
 ADD ./config/php56.pool.conf /usr/local/etc/php-fpm.d/
 ADD ./config/custom.php.ini /usr/local/etc/php/conf.d
 RUN sed -e '/9000/ s/^;*/;/' -i /usr/local/etc/php-fpm.d/zz-docker.conf
