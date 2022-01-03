@@ -2,11 +2,12 @@
 PHP 5.6 FPM based on official PHP Docker repository
 https://github.com/docker-library/docs/tree/master/php
 
+Used in legacy Symfony 1.x projects
+
 ## What is it?
 Docker image for PHP-5.6-FPM with :
  - mbstring
  - mcrypt
- - pdo_pgsql
  - intl
  - gd
  - ldap
@@ -14,9 +15,8 @@ Docker image for PHP-5.6-FPM with :
  - memcached
  - soap
  - zip
- - ioncubeLoader
- - oci8 + pdo_oci
- - dblib + mssql
+ - Oracle: oci8 + pdo_oci
+ - SQLServer: dblib + mssql
 
 Timezone is set to _Europe/Paris_.
 
@@ -26,7 +26,7 @@ Intended use : coupled to nginx with docker-compose
 User : www-data
 Listen : /var/run/php-fpm/php56.sock
 
-Volume `sock` should be shared between containers : 
+Volume `sock` should be shared between containers :
 ```
     php56:
       ...
