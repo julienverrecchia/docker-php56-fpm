@@ -90,8 +90,6 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
 # PHP config
 COPY ./config/php-fpm.conf /usr/local/etc/
 COPY ./config/php56.pool.conf /usr/local/etc/php-fpm.d/
-RUN sed -e '/9000/ s/^;*/;/' -i /usr/local/etc/php-fpm.d/zz-docker.conf
-RUN sed -e '/9000/ s/^;*/;/' -i /usr/local/etc/php-fpm.d/www.conf
 
 RUN usermod -u 1000 www-data \
     && mkdir -p /var/log/php \

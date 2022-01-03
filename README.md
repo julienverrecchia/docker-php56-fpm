@@ -24,7 +24,7 @@ Timezone is set to _Europe/Paris_.
 Intended use : coupled to nginx with docker-compose
 
 User : www-data
-Listen : /var/run/php-fpm/php56.sock
+Listen : `:9000`
 
 Volume `sock` should be shared between containers :
 ```
